@@ -8,10 +8,16 @@ import { INote } from './interfaces/note-interface'
 })
 
 export class NotesComponent {
-  public notes: INote[] = [{title: 'juan', body: 'lorem ipsem'}];
-  // public newNote: string;
+
+  public notes: INote[] = [];
 
   public addNote(note: INote) {
     this.notes.push(note);
+    console.log(this.notes)
   }
+
+  public deleteNote(index) {
+    this.notes = this.notes.slice(0, index).concat(this.notes.slice(index + 1, this.notes.length))
+  }
+
 }

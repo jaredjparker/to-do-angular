@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { INote } from '../interfaces';
 
 @Component({
@@ -7,16 +7,20 @@ import { INote } from '../interfaces';
   styleUrls: ['./new-note.component.scss']
 })
 export class NewNoteComponent {
-  // @Input() public notesInputValue: string;
-  @Output() public saved = new EventEmitter<INote>();
 
-  public note: INote = {
-    title: 'works',
-    body: 'this is the note'
-  };
+  @Output() public saved = new EventEmitter<any>();
+
+  private noteTitle: string;
+  private noteId: number
+
+  // public note: INote = {
+  //   id: -1,
+  //   title: this.noteTitle,
+  //   body: 'this is the note'
+  // };
 
   public save() {
-    this.saved.emit(this.note)
+    this.saved.emit({ id: this.noteId, title: this.noteTitle})
   }
 
 
