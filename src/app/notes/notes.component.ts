@@ -13,11 +13,10 @@ export class NotesComponent {
 
   public addNote(note: INote) {
     this.notes.push(note);
-    console.log(this.notes)
   }
 
   public deleteNote(index) {
-    this.notes = this.notes.slice(0, index).concat(this.notes.slice(index + 1, this.notes.length))
+    this.notes = this.notes.filter(item => item.id !== index)
   }
 
 }
