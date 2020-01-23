@@ -20,3 +20,7 @@ Enums are good to use when you have
         East = 'East',
         West = 'West'
     }
+
+Component is about behavior.  Is the behavior already covered by native HTML?
+
+What is a UI Component? - It is a HTML custom element or enhanced HTML element

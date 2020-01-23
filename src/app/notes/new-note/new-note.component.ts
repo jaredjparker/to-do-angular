@@ -2,20 +2,21 @@ import { Component, Output, EventEmitter, ElementRef, ViewChild } from '@angular
 
 import { INote } from '../interfaces';
 import { NewNoteState } from '../enumerations'
+import { NotesCrudService } from '../notes-services/notes-crud.service'
 
 @Component({
   selector: 'new-note',
   // templateUrl: './new-note.component.html',
   template: `
   <input #activeTitleInput />
-  <div *ngIf='state === "Active"; then activeNewNote else notActiveNewNote'></div>
+<div *ngIf='state === "Active"; then activeNewNote else notActiveNewNote'></div>
 <ng-template #notActiveNewNote>
-  <input (click)='newNoteStateSwitch()' placeholder='Title' />
+  <input class='form-control' (click)='newNoteStateSwitch()' placeholder='Title' />
 </ng-template>
 <ng-template #activeNewNote>
-  <input [(ngModel)]='noteTitle' placeholder='Title' />
-  <input [(ngModel)]='noteBody' placeholder='Take a note...' />
-  <button (click)='save()'>Close</button>
+  <input class='form-control' [(ngModel)]='noteTitle' placeholder='Title' />
+  <input class='form-control' [(ngModel)]='noteBody' placeholder='Take a note...' />
+  <button class='btn btn-primary' (click)='save()'>Close</button>
 </ng-template>
   `,
   styleUrls: ['./new-note.component.scss']
@@ -29,6 +30,7 @@ export class NewNoteComponent {
   public noteTitle: string;
   public noteId: number;
   public noteBody: string;
+  public notesService = new NotesCrudService;
 
   public newNoteStateSwitch() {
     this.state === 'NotActive' ? this.state = NewNoteState.Active : this.state = NewNoteState.NotActive;
@@ -45,6 +47,7 @@ export class NewNoteComponent {
       title: this.noteTitle,
       body: this.noteBody
     };
+    this.notesService.addNote(note);
     this.saved.emit(note);
     this.newNoteStateSwitch();
     this.noteId === undefined ? this.noteId = 0 : this.noteId++;

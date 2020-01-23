@@ -1,8 +1,0 @@
-  <new-note (saved)='addNote($event)'></new-note>
-  
-  <div *ngFor="let note of notes; let i=index">
-      <h1>{{note.title}}</h1>
-      <p>{{note.body}}</p>
-      <p>{{note.id}}</p>
-      <button [(id)]='note.id' (click)='deleteNote(note.id)'>Delete</button>
-  </div>
